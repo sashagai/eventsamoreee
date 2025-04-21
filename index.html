@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events Amore | Роскошный декор любых мероприятий</title>
+    <style>
+        :root {
+            --primary: #ffb6c1; /* Нежный розовый */
+            --primary-dark: #d23c77; /* Глубокий розовый */
+            --secondary: #fff5f7; /* Розовое молоко */
+            --accent: #8a2e52; /* Бордовый */
+            --text: #333333;
+            --light: #ffffff;
+            --gold: #d4af37; /* Золотой акцент */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cormorant Garamond', 'Montserrat', serif;
+        }
+        
+        body {
+            color: var(--text);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Luxury шапка */
+        header {
+            background-color: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(12px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 182, 193, 0.2);
+            box-shadow: 0 2px 30px rgba(138, 46, 82, 0.05);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            letter-spacing: 1.5px;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+        }
+        
+        .logo span {
+            color: var(--accent);
+            font-style: italic;
+            position: relative;
+        }
+        
+        .logo span:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: var(--gold);
+            bottom: -5px;
+            left: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 50px;
+            position: relative;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 16px;
+            letter-spacing: 1px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-dark);
+        }
+        
+        .nav-links li:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        
+        .nav-links li:hover:after {
+            width: 100%;
+        }
+        
+        /* Pinterest-style герой */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            min-height: 900px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--light);
+            padding-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(138,46,82,0.1) 0%, rgba(138,46,82,0.3) 100%);
+            z-index: 0;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 72px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            line-height: 1.2;
+            letter-spacing: 1px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            letter-spacing: 1px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-dark);
+            color: var(--light);
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+            font-size: 18px;
+            letter-spacing: 1.5px;
+            border: 2px solid var(--primary-dark);
+            box-shadow: 0 10px 30px rgba(210, 60, 119, 0.3);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .btn:hover {
+            background-color: transparent;
+            border-color: var(--light);
+            color: var(--light);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(210, 60, 119, 0.4);
+        }
+        
+        .btn:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.6s;
+        }
+        
+        .btn:hover:after {
+            left: 100%;
+        }
+        
+        /* Секция услуг */
+        .services {
+            padding: 120px 0;
+            background-color: var(--secondary);
+            position: relative;
+        }
+        
+        .services:before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, var(--secondary));
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .section-title h2 {
+            font-size: 48px;
+            color: var(--accent);
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 2px;
+            background: var(--gold);
+            bottom: -15px;
+            left: 25%;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        
+        .service-card {
+            background-color: var(--light);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(138, 46, 82, 0.08);
+            transition: all 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+            position: relative;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px rgba(138, 46, 82, 0.15);
+        }
+        
+        .service-img {
+            height: 350px;
+            overflow: hidden;
+        }
+        
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        
+        .service-card:hover .service-img img {
+            transform: scale(1.1);
+        }
+        
+        .service-content {
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .service-content h3 {
+            font-size: 26px;
+            margin-bottom: 15px;
+            color: var(--accent);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .service-content p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text);
+            line-height: 1.8;
+        }
+        
+        /* Pinterest галерея */
+        .portfolio {
+            padding: 120px 0;
+            background-color: var(--light);
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            grid-auto-rows: minmax(300px, auto);
+        }
+        
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        
+        .portfolio-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(138,46,82,0.8), transparent);
+            color: var(--light);
+            padding: 30px;
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+        }
+        
+        .portfolio-overlay h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .portfolio-overlay p {
+            font-size: 14px;
+            font-family: 'Montserrat', sans-serif;
+            opacity: 0.9;
+        }
+        
+        /* О нас */
+        .about {
+            padding: 120px 0;
+            background-color: var(--secondary);
+            position: relative;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .about-img {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(138, 46, 82, 0.1);
+            position: relative;
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        
+        .about-img:hover img {
+            transform: scale(1.05);
+        }
+        
+        .about-text h2 {
+            font-size: 48px;
+            color: var(--accent);
+            margin-bottom: 30px;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+        }
+        
+        .about-text h2:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 2px;
+            background: var(--gold);
+            bottom: -15px;
+            left: 0;
+        }
+        
+        .about-text p {
+            margin-bottom: 25px;
+            font-size: 18px;
+            line-height: 1.9;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 36px;
+            color: var(--primary-dark);
+            margin-top: 30px;
+        }
+        
+        /* Контакты */
+        .contact {
+            padding: 120px 0;
+            background-color: var(--light);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 60px;
+        }
+        
+        .contact-info h3 {
+            font-size: 32px;
+            color: var(--accent);
+            margin-bottom: 30px;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+        }
+        
+        .contact-info h3:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 2px;
+            background: var(--gold);
+            bottom: -10px;
+            left: 0;
+        }
+        
+        .contact-info p {
+            margin-bottom: 25px;
+            font-size: 18px;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info i {
+            margin-right: 15px;
+            color: var(--primary-dark);
+            font-size: 20px;
+            width: 30px;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 40px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: var(--light);
+            border-radius: 50%;
+            margin-right: 15px;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+            font-size: 20px;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(210, 60, 119, 0.3);
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 18px 25px;
+            margin-bottom: 25px;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s;
+            background-color: var(--secondary);
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.2);
+        }
+        
+        .contact-form textarea {
+            height: 180px;
+            resize: vertical;
+        }
+        
+        /* Футер */
+        footer {
+            background-color: var(--accent);
+            color: var(--light);
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--light);
+            margin-bottom: 30px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .footer-logo span {
+            font-style: italic;
+            color: var(--gold);
+        }
+        
+        .footer-text {
+            font-size: 16px;
+            margin-bottom: 40px;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.8;
+        }
+        
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255,255,255,0.1);
+            color: var(--light);
+            border-radius: 50%;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 18px;
+        }
+        
+        .footer-social a:hover {
+            background-color: var(--gold);
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            font-size: 14px;
+            opacity: 0.7;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        
+        /* Адаптивность */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 60px;
+            }
+            
+            .hero p {
+                font-size: 20px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-img {
+                order: -1;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            
+            .nav-links li {
+                margin-left: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 800px;
+                background-attachment: scroll;
+            }
+            
+            .hero h1 {
+                font-size: 48px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .btn {
+                padding: 15px 35px;
+                font-size: 16px;
+            }
+            
+            .section-title h2 {
+                font-size: 36px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .about-text h2 {
+                font-size: 32px;
+            }
+            
+            .contact-info h3 {
+                font-size: 28px;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&family=Dancing+Script:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Events <span>Amore</span></div>
+                <ul class="nav-links">
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#portfolio">Галерея</a></li>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Герой секция -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="fade-in">Events Amore - профессиональный декор мероприятий</h1>
+                <p class="fade-in delay-1">Индивидуальный подход в каждому событию. От классических свадеб до тематических вечеренок - мы сделаем ваш праздник уникальным.</p>
+                <a href="#contact" class="btn fade-in delay-2">Забронировать консультацию</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция услуг -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Наши услуги</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Полный свадебный декор">
+                    </div>
+                    <div class="service-content">
+                        <h3>Полный свадебный декор</h3>
+                        <p>Комплексное оформление свадьбы от зоны церемонии до банкетного зала. Индивидуальные концепции, учитывающие все ваши пожелания.</p>
+                    </div>
+                </div>
+                <div class="service-card fade-in delay-1">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Корпоративное мероприятие">
+                    </div>
+                    <div class="service-content">
+                        <h3>Корпоративы</h3>
+                        <p>Профессиональная декорация для создания атмосферы, способствующей командной работе и празднованию достижений.</p>
+                    </div>
+                </div>
+                <div class="service-card fade-in delay-2">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="День рождения">
+                    </div>
+                    <div class="service-content">
+                        <h3>Дни рождения</h3>
+                        <p>Оформление, которое сделает каждый день рождения незабываемым, с учетом интересов именинника.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Портфолио -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Наши работы</h2>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item fade-in">
+                    <img src="https://i.pinimg.com/736x/a2/55/46/a25546e17dac60973261127ca6895a6e.jpg" alt="Свадьба в стиле бохо">
+                    <div class="portfolio-overlay">
+                        <h3>Свадьба в стиле бохо</h3>
+                        <p>Натуральные текстуры, пастельные тона и много зелени</p>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in delay-1">
+                    <img src="https://i.pinimg.com/736x/20/ed/03/20ed03d4cf4b680b6c86e31ddb17248c.jpg"Гавайская вечеринка">
+                    <div class="portfolio-overlay">
+                        <h3>Гавайская вечеринка</h3>
+                        <p>Цветы и серфы</p>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in delay-2">
+                    <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="День рождения">
+                    <div class="portfolio-overlay">
+                        <h3>День рождения</h3>
+                        <p>Яркие акценты и праздничное настроение</p>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <img src="https://i.pinimg.com/originals/6e/40/e8/6e40e80b2afb4d30b63044ed957cbac0.jpg" alt="Современная свадьба">
+                    <div class="portfolio-overlay">
+                        <h3>Современная свадьба</h3>
+                        <p>Элегантные цветочные композиции и изысканный стиль</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- О нас -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <h2>О Events Amore</h2>
+                    <p>Мы создаем не просто декор, а атмосферу вашей мечты. Каждая деталь - от центрального цветочного украшения до последней свечи - тщательно продумана и выполнена с любовью.</p>
+                    <p>Основатель студии - Елизавета Клименко, декоратор роскошных свадебных пространств. Наша команда состоит из талантливых флористов, дизайнеров и декораторов, которые разделяют страсть к созданию прекрасного.</p>
+                    <p>Мы работаем только с лучшими материалами и уделяем внимание каждой детали, потому что верим, что именно детали создают незабываемые впечатления.</p>
+                    <div class="signature">Елизавета Клименко</div>
+                </div>
+                <div class="about-img fade-in delay-1">
+                    <img src="https://avatars.mds.yandex.net/get-ydo/5490072/2a00000187e530554d05ed5a2b74e0d6aa06/diploma" alt="Елизавета Клименко">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Свяжитесь с нами</h2>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info fade-in">
+                    <h3>Давайте создадим ваш идеальный праздник</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Москва, ул. Примерная, 18</p>
+                    <p><i class="fas fa-phone"></i> +7 (999) 123-45-67</p>
+                    <p><i class="fas fa-envelope"></i> hello@eventsamore.com</p>
+                    <p><i class="fas fa-clock"></i> Пн-Пт: 10:00 - 20:00</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form fade-in delay-1">
+                    <form id="contactForm">
+                        <input type="text" placeholder="Ваше имя" required>
+                        <input type="email" placeholder="Ваш email" required>
+                        <input type="tel" placeholder="Ваш телефон">
+                        <textarea placeholder="Расскажите о вашей свадьбе (дата, место, стиль, пожелания)"></textarea>
+                        <button type="submit" class="btn">Отправить запрос</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo fade-in">Events <span>Amore</span></div>
+                <p class="footer-text fade-in delay-1"></p>
+                <div class="footer-social fade-in delay-2">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+                <p class="copyright fade-in delay-2">©️ 2025 Events Amore. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Обработка формы
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо за ваш запрос! Мы свяжемся с вами в ближайшее время для обсуждения деталей.');
+            this.reset();
+        });
+        
+        // Анимации при скролле
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(el => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            fadeObserver.observe(el);
+        });
+        
+        // Фиксированная шапка
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 5px 30px rgba(138, 46, 82, 0.1)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
